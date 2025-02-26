@@ -1,0 +1,142 @@
+1)using System;
+
+public class RectangleCalculator
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Введите длину стороны a:");
+        double a = Convert.ToDouble(Console.ReadLine());
+
+        Console.WriteLine("Введите коэффициент n (в процентах):");
+        double n = Convert.ToDouble(Console.ReadLine());
+
+        double b = (n / 100) * a;
+
+        double area = a * b;
+
+        double perimeter = 2 * (a + b);
+
+        Console.WriteLine($"Площадь прямоугольника: {area}");
+        Console.WriteLine($"Периметр прямоугольника: {perimeter}");
+    }
+}
+8)using System;
+
+class Program
+{
+    static void Main()
+    {
+  
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+
+       
+        Console.Write("Введите первое слово: ");
+        string word1 = Console.ReadLine();
+
+       
+        Console.Write("Введите второе слово: ");
+        string word2 = Console.ReadLine();
+
+      
+        int countWord1 = CountOccurrences(text, word1);
+        int countWord2 = CountOccurrences(text, word2);
+
+       
+        int countConsecutive = CountConsecutiveOccurrences(text, word1, word2);
+
+       
+        Console.WriteLine($"Количество вхождений слова '{word1}': {countWord1}");
+        Console.WriteLine($"Количество вхождений слова '{word2}': {countWord2}");
+        Console.WriteLine($"Количество вхождений слов '{word1}' и '{word2}' друг за другом: {countConsecutive}");
+    }
+
+    static int CountOccurrences(string text, string word)
+    {
+        int count = 0;
+        int index = 0;
+
+        while ((index = text.IndexOf(word, index)) != -1)
+        {
+            count++;
+            index += word.Length;
+        }
+
+        return count;
+    }
+
+    static int CountConsecutiveOccurrences(string text, string word1, string word2)
+    {
+        int count = 0;
+        string pattern = word1 + " " + word2;
+        int index = 0;
+
+        while ((index = text.IndexOf(pattern, index)) != -1)
+        {
+            count++;
+            index += pattern.Length;
+        }
+
+        return count;
+    }
+}
+16)using System;
+
+class Program
+{
+    static void Main()
+    {
+
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+
+       
+        Console.WriteLine("Введите букву:");
+        char letter = Console.ReadLine()[0];
+
+       
+        string resultWord = FindWordWithMostLetters(text, letter);
+
+        
+        if (resultWord != null)
+        {
+            Console.WriteLine($"Слово с наибольшим количеством '{letter}': {resultWord}");
+        }
+        else
+        {
+            Console.WriteLine($"В тексте нет слов, содержащих букву '{letter}'.");
+        }
+    }
+
+    static string FindWordWithMostLetters(string text, char letter)
+    {
+        string[] words = text.Split(new char[] { ' ', ',', '.', '!', '?', ';', ':', '-', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        string maxWord = null;
+        int maxCount = 0;
+
+        foreach (string word in words)
+        {
+            int count = CountOccurrences(word, letter);
+            if (count > maxCount)
+            {
+                maxCount = count;
+                maxWord = word;
+            }
+        }
+
+        return maxWord;
+    }
+
+    static int CountOccurrences(string word, char letter)
+    {
+        int count = 0;
+        foreach (char c in word)
+        {
+            if (char.ToLower(c) == char.ToLower(letter)) 
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+}
